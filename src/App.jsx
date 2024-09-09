@@ -27,10 +27,9 @@ const App = () => {
       if (cards[firstIndex] === cards[secondIndex]) {
         setMatchedIndices((prev) => [...prev, firstIndex, secondIndex]);
       }
-      const timer = setTimeout(() => setFlippedIndices([]), 1000);
-      return () => clearTimeout(timer); // Clean up the timer
+      setTimeout(() => setFlippedIndices([]), 1000);
     }
-  }, [flippedIndices, cards]);
+  }, [flippedIndices, cards]); // Added cards to the dependency array
 
   const handleClick = (index) => {
     if (flippedIndices.length < 2 && !flippedIndices.includes(index) && !matchedIndices.includes(index)) {
@@ -56,8 +55,11 @@ const App = () => {
   };
 
   return (
-    <div className="game-board">
-      {cards.map((_, index) => renderCard(index))}
+    <div>
+      <h1 >Memory Game</h1>
+      <div className="game-board">
+        {cards.map((_, index) => renderCard(index))}
+      </div>
     </div>
   );
 };
